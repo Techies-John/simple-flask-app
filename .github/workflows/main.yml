@@ -7,12 +7,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag simple-flask-app:${{ github.sha }}
+      run: docker build . --file Dockerfile --tag johnvincentjimar/simple-flask-app:${{ github.sha }}
+
+    - name: Push the Docker image
+      run: docker push techiesjohn/simple-flask-app:${{ github.sha }}
