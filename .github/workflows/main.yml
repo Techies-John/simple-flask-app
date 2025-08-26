@@ -20,4 +20,4 @@ jobs:
       run: docker build . --file Dockerfile --tag johnvincentjimar/simple-flask-app:${{ github.sha }}
 
     - name: Push the Docker image
-      run: docker push techiesjohn/simple-flask-app:${{ github.sha }}
+      run: docker push johnvincentjimar/simple-flask-app:${{ github.sha }}
